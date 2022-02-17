@@ -1,6 +1,6 @@
 /**
 * Name: Mohsen Ameli
-* Date: Feb 14, 2022
+* Date: Feb 16, 2022
 * Description: A program that asks for a phrase and
 * encrypts it with sha-69
 */

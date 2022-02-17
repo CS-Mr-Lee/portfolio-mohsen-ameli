@@ -1,8 +1,8 @@
 /**
 * Name: Mohsen Ameli
-* Date: Feb 3, 2022
+* Date: Feb 16, 2022
 * Description: A program that asks for two grocery items and their price.
-*              and prints out the results
+* and prints out the results
 */
 
 import java.util.*;

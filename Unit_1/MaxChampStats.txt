@@ -1,0 +1,2 @@
+Tryndamere has the highest hp : 625.64
+Orianna has the lowest armor : 17.04

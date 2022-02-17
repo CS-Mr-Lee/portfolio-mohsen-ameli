@@ -1,6 +1,6 @@
 /**
 * Name: Mohsen Ameli
-* Date: Feb 14, 2022
+* Date: Feb 16, 2022
 * Description: A program that asks for a numerator and a denominator
 * and prints out the quotient.
 */
