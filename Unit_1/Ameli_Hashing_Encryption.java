@@ -6,7 +6,7 @@
 */
 
 import java.util.*;
-public class Ameli_Encryption {
+public class Ameli_Hashing_Encryption {
     public static void main(String[] args) {
         // getting vars
         String input;

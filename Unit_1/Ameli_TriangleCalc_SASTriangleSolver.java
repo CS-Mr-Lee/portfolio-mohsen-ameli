@@ -7,7 +7,7 @@
 
 import java.util.Scanner;
 
-public class Ameli_SASTriangleSolver {
+public class Ameli_TriangleCalc_SASTriangleSolver {
     public static void main(String[] args) {
 
         // vars for three sides and three angles
@@ -26,24 +26,24 @@ public class Ameli_SASTriangleSolver {
         in.close();
 
         // getting the smallest angle
-        System.out.printf("The smallest possible a angle is : %.2f° \n", SmallestAngle(side_b, side_c, angle_A));
+        System.out.printf("The smallest possible a angle is : %.2f° \n", smallestAngle(side_b, side_c, angle_A));
     }
 
     /**
      * description : takes in two sides and an angle and returns the smallest angle possible
-     * @param side_b
-     * @param side_c
-     * @param angle_A
-     * @return double
+     * @param side_b side b in the triangle
+     * @param side_c side c in the triangle
+     * @param angle_A angle A in the triangle
+     * @return the smallest possible angle in the triangle 
      */
-    public static double SmallestAngle(double side_b, double side_c, double angle_A) {
+    public static double smallestAngle(double side_b, double side_c, double angle_A) {
         // neccessary vars
         double cos_a, side_a, angle_B, angle_C;
         double smallest = 0.0;
         
         // Math time
-        cos_a = Math.cos(angle_A);
-        side_a = Math.sqrt(Math.pow(side_b, 2) + Math.pow(side_c, 2) - (2 * side_b * side_c * cos_a));
+        cos_a   = Math.cos(angle_A);
+        side_a  = Math.sqrt(Math.pow(side_b, 2) + Math.pow(side_c, 2) - (2 * side_b * side_c * cos_a));
         angle_B = Math.toDegrees(Math.asin((Math.sin(angle_A) * side_b) / side_a ));
         angle_C = 180 - angle_A - angle_B;
 

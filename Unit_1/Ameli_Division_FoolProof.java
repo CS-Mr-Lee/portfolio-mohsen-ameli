@@ -6,7 +6,7 @@
 */
 
 import java.util.*;
-public class Ameli_FoolProof {
+public class Ameli_Division_FoolProof {
     public static void main(String[] args) {
         // getting vars
         String top_str = null;

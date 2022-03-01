@@ -7,7 +7,7 @@
 */
 
 import java.io.*;
-public class Ameli_ChampionFilter {
+public class Ameli_Champions_ChampionFilter  {
     public static void main(String[] args) {
         String data = "";
 
