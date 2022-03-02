@@ -121,7 +121,7 @@ public class Human {
     public void eat(Vegetable veg, double grams) {
         // converting human's kg to grams, 
         // then adding the weight of the vegetable to the human
-        this.weight = this.weight % 1000 + veg.getWeight();
+        this.weight = (this.weight * 1000 + grams) / 1000;
         
         // adding energy level
         int cal = veg.eaten(grams); // getting how much calories the vegetable gives
@@ -144,7 +144,7 @@ public class Human {
     public void eat(Cookie food, double grams) {
         // converting human's kg to grams, 
         // then adding the weight of the cookie to the human
-        this.weight = this.weight % 1000 + food.getWeight();
+        this.weight = (this.weight * 1000 + grams) / 1000;
         
         // adding energy level
         int cal = food.eaten(grams); // getting how much calories the cookie gives

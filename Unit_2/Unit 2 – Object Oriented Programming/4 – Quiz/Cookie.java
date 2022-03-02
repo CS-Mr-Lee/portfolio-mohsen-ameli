@@ -118,7 +118,6 @@ public class Cookie {
             double weight_percentage = weight * 100 / this.weight;
             // getting the calories based on the percentage of the percentage
             double cal = weight_percentage * this.calories / 100;
-            System.out.println("cal" + cal);
             return (int) cal;
         }
     }
