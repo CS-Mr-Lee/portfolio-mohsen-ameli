@@ -1,3 +1,8 @@
+/**
+* Name: Mohsen Ameli
+* Date: March 1, 2022
+* Description: Basic vegetable class, with a name, some weight, and some calories
+*/
 public class Vegetable {
     /*
     Attributes
@@ -5,14 +10,14 @@ public class Vegetable {
 
     /** name of the vegetable */
     private String name;
-    /** Number of calories */
-    private int calories;
     /** Weight in grams */
     private double weight;
+    /** Number of calories */
+    private int calories;
 
 
     /*
-    Constructor
+    Constructors
     */
 
     /**
@@ -29,10 +34,10 @@ public class Vegetable {
      * @param calories amount of calories it has
      * @param weight its weight
      */
-    public Vegetable(String name, int calories, double weight) {
+    public Vegetable(String name, double weight, int calories) {
         this.name       = name;
-        this.calories   = calories;
         this.weight     = weight;
+        this.calories   = calories;
     }
 
 
@@ -68,17 +73,27 @@ public class Vegetable {
     */
 
     /**
-     * returns whether or not the vegetable is green
-     * @return true or false based on if it's green
+     * vegetable being eaten
+     * @return the amount of calories the vegetable gives
      */
-    public double eaten(int weight) {
-        return this.weight;
+    public int eaten(double weight) {
+        // if requested weight is higher than the actual
+        // weight of the vegetable, we return a value of -1
+        if (weight > this.weight) {
+            return -1;
+        } else {
+            // getting the percentage of the weight that the user has requested
+            double weight_percentage = weight * 100 / this.weight;
+            // getting the calories based on the percentage of the percentage
+            double cal = weight_percentage * this.calories / 100;
+            return (int) cal;
+        }
     }
     /**
-     * returns whether or not the vegetable is edible
-     * @return true or false based on if it's edible
+     * the important info of this vegetable
+     * @return the important info of this vegetable
      */
     public String toString() {
-        return ("Name: " + this.name + "Calories: " + this.calories + " Weight: " + this.weight);
+        return ("Name: " + this.name + "\nWeight: " + this.weight + " kg\nCalories: " + this.calories);
     }
 }

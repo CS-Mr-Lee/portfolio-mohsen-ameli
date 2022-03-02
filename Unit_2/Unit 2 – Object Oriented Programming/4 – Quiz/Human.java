@@ -1,6 +1,6 @@
 /**
 * Name: Lucas Lu and mohsen Ameli
-* Date: Feb.28
+* Date: Feb 28, 2022
 * Description: In this Human class, I will create a contrustor, several attributes, Accessors include getName(), getWeight()
 * getEnergyLvl(), getSex(), getAge(), and several Mutators include setEneregyLvl, sleep, run and toString method. In main method, I 
 * will reate two Human objects and assign some values to it, then test all the methods, accessors and mutators
@@ -9,8 +9,9 @@
 
 public class Human {
     /*
-    * Attributes
+    Attributes
     */
+    
     /** Name of the human */
     private String name;
     /** Weight in kilograms */
@@ -21,17 +22,21 @@ public class Human {
     /** 
      * Constructor
      */
+
     /**
-     * create a human constructor with several paramters
-     * @param name String type the name of the human
-     * @param weight Double type the weight of the human
-     * @param energyLvl the energy level of the human
+     * Default human constructor
      */
     public Human() {
         this.name       = "";
         this.weight     = -1;
         this.energyLvl  = -1;
     }
+    /**
+     * create a human constructor with several paramters
+     * @param name String type the name of the human
+     * @param weight Double type the weight of the human
+     * @param energyLvl the energy level of the human
+     */
     public Human(String name, double weight, int energyLvl) {
         this.name       = name;
         this.weight     = weight;
@@ -42,19 +47,19 @@ public class Human {
     * Accessors
     */
 
-    /** get the name attribute value in class
+    /** gets the name of the current human
      * @return the name of the human
      */
     public String getName() {
         return this.name;
     }
-    /** get the weight attribute value in class
+    /** gets the weight of the current human
      * @return the weight of the human
      */
     public double getWeight() {
         return this.weight;
     }
-    /** get the energyLvl attributes value in class
+    /** gets the energyLvl of the current human
      * @return the energyLvl of the human
      */
     public int getEnergyLvl() {
@@ -63,11 +68,11 @@ public class Human {
 
 
     /**
-     * Mutators
+     * Methods
      */
 
     /**
-     * make some restrictions to energylevel to make sure it is limited between 0 to 100
+     * making restrictions to energylevel to make sure it is limited between 0-100%
      * @param energy the new energy level
      */
     public void setEneregyLvl(int energy) {
@@ -89,36 +94,79 @@ public class Human {
         double new_energy = hrs * 0.1; //calculate how many percentages should be boost
         this.energyLvl = (int) (this.energyLvl * (1 + new_energy)); //calculate the final energy Level
         
-        //modify attributes value so that it always inside the boundary (0-100)
+        // checking the energy level so it's always inside the boundary 0-100%
         setEneregyLvl(this.energyLvl); 
     }
     
     /**
-     * after running 1km, the person will lose 0.001kg in weight, calculating current weight after running
-     * @param km distance in which the human ran
+     * after running n km, the person will lose 0.001kg in weight, and 3% of their energy
+     * @param km distance in which the human runs for
      */
     public void run(double km) {
-        this.energyLvl = (int) (this.energyLvl - (km * 0.3));
+        double energy = 3 * this.energyLvl / 100; // 3% of human's energy level
+        this.energyLvl = this.energyLvl - (int) (energy * km); // decreasing energy level
+
+        // checking the energy level so it's always inside the boundary 0-100%
+        setEneregyLvl(this.energyLvl); 
+
+        // decreasing weight
         this.weight = this.weight - (0.001 * km);
     }
     
     /**
-     * after running 1km, the person will lose 0.001kg in weight, calculating current weight after running
-     * @param km distance in which the human ran
+     * Human eats a vegetable
+     * @param veg Vegetable class that the human is tryna eat
+     * @param grams how much of the vegetable the human is eating
      */
     public void eat(Vegetable veg, double grams) {
-        // adding the weight of the vegetable to the human
-        this.weight = this.weight + veg.getWeight();
+        // converting human's kg to grams, 
+        // then adding the weight of the vegetable to the human
+        this.weight = this.weight % 1000 + veg.getWeight();
         
         // adding energy level
-        this.energyLvl = this.energyLvl + (int) ((veg.getCalories() * 0.1 / 15));
+        int cal = veg.eaten(grams); // getting how much calories the vegetable gives
+        
+        if (cal != -1) { // vegetable was eaten successfuly
+            this.energyLvl = this.energyLvl + (int) Math.round(0.01 * cal / 15 * 100); // updating human's energy levels
+            
+            // checking the energy level so it's always inside the boundary 0-100%
+            setEneregyLvl(this.energyLvl); 
+        } else { // dont' have enough food
+            System.out.println("I don't have that much food");
+        }
     }
 
     /**
-     * returns all the attributes of the human in a String
+     * Human eats a cookie
+     * @param food Cookie class that the human is tryna eat
+     * @param grams how much of the cookie the human is eating
+     */
+    public void eat(Cookie food, double grams) {
+        // converting human's kg to grams, 
+        // then adding the weight of the cookie to the human
+        this.weight = this.weight % 1000 + food.getWeight();
+        
+        // adding energy level
+        int cal = food.eaten(grams); // getting how much calories the cookie gives
+
+        if (cal == -1) { // dont' have enough food
+            System.out.println("I don't have that much food");
+        } else if (cal == -2) { // the cookie is still packaged
+            System.out.println("I can't eat the bag");
+        }
+        else { // cookie was eaten successfuly
+            this.energyLvl = this.energyLvl + (int) Math.round(0.01 * cal / 15 * 100); // updating human's energy levels
+
+            // checking the energy level so it's always inside the boundary of 0-100%
+            setEneregyLvl(this.energyLvl); 
+        }
+    }
+
+    /**
+     * prints out all the attributes of the human as a String
      * @return a String with all attributes
      */
     public String toString() {
-        return ("\nName: " + this.name + "\nWeight: " + this.weight + " kg\nEnergy Level: " + Math.round(this.energyLvl) + "%");
+        return ("Name: " + this.name + "\nWeight: " + this.weight + " kg\nEnergy Level: " + Math.round(this.energyLvl) + "%");
     }
 }

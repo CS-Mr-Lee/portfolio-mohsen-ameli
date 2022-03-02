@@ -1,20 +1,26 @@
+/**
+* Name: Mohsen Ameli
+* Date: March 1, 2022
+* Description: Basic cookie class, with a name, some weight,
+* some calories, and whether or not it is packaged
+*/
 public class Cookie {
     /*
     Attributes
     */
 
-    /** name of the cookie */
+    /** Name of the cookie */
     private String name;
-    /** Number of calories */
-    private int calories;
     /** Weight in grams */
     private double weight;
+    /** Number of calories */
+    private int calories;
     /** Whether the cookie is packaged or not */
     private boolean isPackaged;
 
 
     /*
-    Constructor
+    Constructors
     */
 
     /**
@@ -27,28 +33,28 @@ public class Cookie {
         this.isPackaged = false;
     }
     /**
-     * creates a basic Cookie objcet
-     * @param name the name of it
-     * @param calories amount of calories it has
-     * @param weight its weight
+     * Constructing an unpackaged cookie
+     * @param name the name of the cookie
+     * @param weight cookie's weight
+     * @param calories amount of calories the cookie has
      */
     public Cookie(String name, double weight, int calories) {
         this.name       = name;
-        this.calories   = calories;
         this.weight     = weight;
+        this.calories   = calories;
         this.isPackaged = false;
     }
     /**
-     * creates a basic Cookie objcet
-     * @param name the name of it
-     * @param calories amount of calories it has
-     * @param weight its weight
+     * Constructing a packaged cookie
+     * @param name the name of the cookie
+     * @param weight cookie's weight
+     * @param calories amount of calories the cookie has
      * @param isPackaged Whether the cookie is packaged or not
      */
     public Cookie(String name, double weight, int calories, boolean isPackaged) {
         this.name       = name;
-        this.calories   = calories;
         this.weight     = weight;
+        this.calories   = calories;
         this.isPackaged = isPackaged;
     }
 
@@ -89,6 +95,7 @@ public class Cookie {
     /*
     Methods
     */
+
     /**
      * opens the package if it's closed
      */
@@ -98,22 +105,28 @@ public class Cookie {
         }
     }
     /**
-     * returns whether or not the cookie is green
-     * @return true or false based on if it's green
+     * cookie being eaten
+     * @return the amount of calories the cookie gives
      */
     public int eaten(double weight) {
-        if (!this.isPackaged) {
-            this.weight = this.weight - weight;
-            return this.calories;
+        if (weight > this.weight) { // more than the weight of the cookie is taken
+            return -1;
+        } else if (this.isPackaged) { // cookie was not eaten because it was packaged
+            return -2;
         } else {
-            return 0;
+            // getting the percentage of the weight that the user has requested
+            double weight_percentage = weight * 100 / this.weight;
+            // getting the calories based on the percentage of the percentage
+            double cal = weight_percentage * this.calories / 100;
+            System.out.println("cal" + cal);
+            return (int) cal;
         }
     }
     /**
-     * returns whether or not the cookie is edible
-     * @return true or false based on if it's edible
+     * prints out the important stuff about the cookie
+     * @return the important stuff about the cookie in terms of a string
      */
     public String toString() {
-        return ("Name: " + this.name + "Calories: " + this.calories + " Weight: " + this.weight);
+        return ("Name: " + this.name + "\nWeight: " + this.weight + " grams\nCalories: " + this.calories);
     }
 }
