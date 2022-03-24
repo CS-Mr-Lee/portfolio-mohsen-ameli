@@ -1,0 +1,29 @@
+/**
+Name : Mohsen Ameli
+Date : Feb 28, 2022
+Description : idk yet
+*/
+
+public class TestFraction {
+    public static void main (String [] args) {
+       Fraction f1 = new Fraction (2,3);
+       Fraction f2 = new Fraction (5,6);
+       Fraction f3 = new Fraction (2,3);
+       Fraction f4 = f1;
+       
+       Fraction [] fArray = new Fraction[3];
+       fArray[0] = f1;
+       fArray[1] = f2;
+       fArray[2] = f3;
+       
+    //    System.out.println(f1);
+    //    System.out.println(f3);
+    //    System.out.println(f4);
+
+       System.out.println(Fraction.multiply(f1, f2));
+
+       Fraction f5 = new Fraction();
+
+       System.out.println(f5);
+    }
+ }

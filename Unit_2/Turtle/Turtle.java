@@ -75,6 +75,8 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
     private static boolean running;
 
 
+
+
     static { init(); }
 
     /**
@@ -1231,7 +1233,7 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
     
     public long stab()
     {
-        Color c=Turtle.getColor("red");
+		Color c=Turtle.getColor("red");
         if(c!=null)this.penColor=c;
         this.isPenDown=true;
         long timeStamp=storeCurrentState();
@@ -2197,7 +2199,28 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
      *
      * @param a commandline args
      */
-    
+    public static void main(String[] a)
+    {
+        //Turtle bob = new Turtle();
+        /*for(int i=0;i<360;i++)
+        {
+            bob.forward(i*1.25);
+            bob.left(90.25);
+        }
+         */
+        /*If you don't know what a for loop is yet this is equivalent to repeating the middle 4 lines 5 times in a row.*/
+        Turtle bob = new Turtle();
+        bgcolor("lightblue");
+        bob.penColor("red");
+        bob.width(10);
+        for(int i=0;i<200;i++)
+        {
+            bob.forward(i/10.);
+            bob.left(5);
+            if(i%10==0)bob.dot("orange");//Draws dots when i is a multiple of 10.
+        }
+        bob.saveGCODE("test.gcode");
+    }
 
     /**
      * Internal mehod for handling events.
@@ -2569,36 +2592,36 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
     }
     
     
-    public static void saveGCODE(String filename)
+    private static void saveGCODE(String filename)
     {
-        PrintWriter out=new PrintWriter(System.out);
-        try
+		PrintWriter out=new PrintWriter(System.out);
+		try
+		{
+			out=new PrintWriter(filename);
+		}
+		catch(Exception e)
+		{
+			
+		}
+		out.println("M104 S200");
+		out.println("M109 S200");
+		out.println("G21");
+		out.println("G90");
+		out.println("M82");
+		out.println("M106");
+		out.println("G28 X0 Y0");
+		out.println("G28 Z0");
+		out.println("G29");
+		out.println("G1 Z15.0 F9000");
+		out.println("G92 E0");
+		out.println("G1 F200 E5");
+		out.println("G92 E0");
+		out.println("G1 X50 Y50 F1800");
+		
+		double e=0;
+		synchronized(turtleLock)
         {
-            out=new PrintWriter(filename);
-        }
-        catch(Exception e)
-        {
-            
-        }
-        out.println("M104 S200");
-        out.println("M109 S200");
-        out.println("G21");
-        out.println("G90");
-        out.println("M82");
-        out.println("M106");
-        out.println("G28 X0 Y0");
-        out.println("G28 Z0");
-        out.println("G29");
-        out.println("G1 Z15.0 F9000");
-        out.println("G92 E0");
-        out.println("G1 F200 E5");
-        out.println("G92 E0");
-        out.println("G1 X50 Y50 F1800");
-        
-        double e=0;
-        synchronized(turtleLock)
-        {
-            int i=0;
+			int i=0;
             for (Map.Entry<Long, ArrayList> entry : turtleStates.entrySet())
             {
                 retrieveState(entry.getKey());
@@ -2606,27 +2629,27 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
                 i++;
                 if(i==1)continue;
                 if(t.__location!=null && !t.__location.equals(t._location))
-                {
-                    double x1=t._location.x,y1=t._location.y,x2=t.__location.x,y2=t.__location.y;
-                    double d=Math.hypot(x1-x2,y1-y2);
-                    e+=d*0.05;
-                    //System.out.printf("%f %f %f %f",x1,y1,x2,y2);
-                    if(t._isPenDown)
-                    {
-                        out.printf("G1 X%.4f Y%.4f E%.4f\n",screenX(x1)*1.0/width*100,screenY(y1)*1.0/height*100,e);
-                    }
-                    else
-                    {
-                        
-                    }
-                        
-                }
-            }
-            out.println("G1 Z15");
-            out.println("M104 S0");
-            out.println("M140 S0");
-            out.close();
-        }
+				{
+					double x1=t._location.x,y1=t._location.y,x2=t.__location.x,y2=t.__location.y;
+					double d=Math.hypot(x1-x2,y1-y2);
+					e+=d*0.05;
+					//System.out.printf("%f %f %f %f",x1,y1,x2,y2);
+					if(t._isPenDown)
+					{
+						out.printf("G1 X%.4f Y%.4f E%.4f\n",screenX(x1)*1.0/width*100,screenY(y1)*1.0/height*100,e);
+					}
+					else
+					{
+						
+					}
+						
+				}
+			}
+			out.println("G1 Z15");
+			out.println("M104 S0");
+			out.println("M140 S0");
+			out.close();
+		}
 
         
     }
