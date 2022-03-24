@@ -53,9 +53,9 @@ public class Ameli_Hashing_Encryption {
     }
 
     /**
-     * description : the swapped first and last character
-     * @param word
-     * @return String
+     * this method will swap the first and last characters in the word given
+     * @param word the word we want to split up
+     * @return the finished word that has split up chars
      */
     public static String swapChars(String word) {
         // Converting the string into a character array

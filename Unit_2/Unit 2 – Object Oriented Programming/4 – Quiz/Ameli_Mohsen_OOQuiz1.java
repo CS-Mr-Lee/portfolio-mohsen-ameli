@@ -31,7 +31,7 @@ public class Ameli_Mohsen_OOQuiz1 {
 
         System.out.println(); // line break
 
-        human.eat(cookie3, 100); // eating a cookie
+        human.eat(cookie3, 10); // eating a cookie
 
         // human after eating the cookie
         System.out.println(human.toString());

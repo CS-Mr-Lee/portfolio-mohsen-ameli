@@ -39,11 +39,11 @@ public class Ameli_Grocieries_GrocieryItem {
         }
 
         // printing the results
-        System.out.println("------------------------------------------");
+        System.out.println("-------------------------------------------------");
         for (int i=0; i <= 1; i++){
             System.out.printf("Grociery #%s : %-20s      $%.2f\n", i+1, name[i], price[i]);
         }
-        System.out.println("------------------------------------------");
+        System.out.println("-------------------------------------------------");
 
     }
 }

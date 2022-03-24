@@ -9,17 +9,17 @@
 import java.io.*;
 public class Ameli_Champions_ChampionFilter  {
     public static void main(String[] args) {
-        String data = "";
+        String js_data = "";
 
         // hp vars
-        Double hp = 0.0;
-        Double biggest = 0.0;
+        double hp = 0.0;
+        double highest_hp = 0.0;
         String temp_name_hp = "";
         String final_name_hp = "";
 
         // armor vars
-        Double armor = 0.0;
-        Double lowest = Double.POSITIVE_INFINITY; // used for comparing armors
+        double armor = 0.0;
+        double lowest_hp = Double.POSITIVE_INFINITY; // used for comparing armors
         String temp_name_armor = "";
         String final_name_armor = "";
 
@@ -34,9 +34,9 @@ public class Ameli_Champions_ChampionFilter  {
             BufferedReader myReader = new BufferedReader(file);
             
             // getting the character with the highest hp
-            while ((data = myReader.readLine()) != null) {
+            while ((js_data = myReader.readLine()) != null) {
                 // seperating the important data from the rest
-                String[] keys = data.split("\"");
+                String[] keys = js_data.split("\"");
 
                 // if the line is an actual key (if it has two or more quotation marks)
                 if (keys.length > 2) {
@@ -49,24 +49,24 @@ public class Ameli_Champions_ChampionFilter  {
 
                     // storing the champion with the highest hp
                     if (keys[1].equals("hp")) {
-                        String[] temp = data.split(":");
+                        String[] temp = js_data.split(":");
                         String[] temp2 = temp[1].split(",");
                         hp = Double.parseDouble(temp2[0]); // converting the string type of hp to double
 
                         // checking if the hp of the new champion is bigger than the one before
-                        if (hp > biggest) {
-                            biggest = hp;
+                        if (hp > highest_hp) {
+                            highest_hp = hp;
                             final_name_hp = temp_name_hp;
                         }
                     }
 
-                    // storing the champion with the lowest armor
+                    // storing the champion with the lowest_hp armor
                     if (keys[1].equals("armor")) {
                         String[] temp3 = keys[2].split(" ");
                         String[] temp4 = temp3[1].split(",");
                         armor = Double.parseDouble(temp4[0]); // converting the string type of armor to double
-                        if (armor < lowest) {
-                            lowest = armor;
+                        if (armor < lowest_hp) {
+                            lowest_hp = armor;
                             final_name_armor = temp_name_armor;
                         }
                     }
@@ -75,9 +75,9 @@ public class Ameli_Champions_ChampionFilter  {
             }
 
             // writing to a file
-            output.write(final_name_hp + " has the highest hp : " + biggest);
+            output.write(final_name_hp + " " + highest_hp);
             output.newLine();
-            output.write(final_name_armor + " has the lowest armor : " + lowest);
+            output.write(final_name_armor + " " + lowest_hp);
 
             // closing everything
             output.close();

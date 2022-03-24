@@ -9,10 +9,10 @@ import java.util.*;
 public class Ameli_Division_FoolProof {
     public static void main(String[] args) {
         // getting vars
-        String top_str = null;
-        Double top = null;
-        Double bottom = null;
-        Boolean quit = false;
+        String top_str = "";
+        int top;
+        int bottom;
+        boolean quit = false;
         Scanner in = new Scanner(System.in);
 
         do {
@@ -20,18 +20,24 @@ public class Ameli_Division_FoolProof {
                 // numerator
                 System.out.print("Enter a numerator : ");
                 top_str = in.nextLine();
-                top = Double.parseDouble(top_str);   
+                top = Integer.parseInt(top_str);   
 
                 // denomenator
                 System.out.print("Enter a denomenator : ");
-                bottom = in.nextDouble();
+                bottom = in.nextInt();
 
                 // divide by 0 or results
                 if (bottom == 0) {
                     System.out.println("Come on, you can't divide by 0 ! \n");
                 } else {
-                    // printing results
-                    System.out.printf("%.3f ÷ %.3f = %.3f \n", top, bottom, top / bottom);
+                    // checking if the division resulted in a whole number
+                    if (top % bottom == 0) {
+                        // printing results
+                        System.out.printf("%d ÷ %d = %d \n", top, bottom, top / bottom);
+                    } else {
+                        // printing results
+                        System.out.printf("%d ÷ %d = %.2f \n", top, bottom, (float) top / bottom);
+                    }
                 }
 
                 in.nextLine();
